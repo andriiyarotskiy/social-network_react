@@ -1,5 +1,6 @@
-import {rerenderEntireTree} from "../render";
-
+let rerenderEntireTree = () => {
+    console.log('state is changed')
+}
 
 let state = {
     profilePage: {
@@ -7,7 +8,7 @@ let state = {
             {id: 1, message: 'My first post', likes: 40},
             {id: 2, message: 'My second post', likes: 2},
         ],
-        newPostText: 'react-js'
+        newPostText: ''
     },
     dialogsPage: {
         messages: [
@@ -27,8 +28,7 @@ let state = {
     },
 }
 
-
-export let addPost = () => {
+export const addPost = () => { // Добавление постов в <My posts />
     let newPost = {
         id: 3,
         message: state.profilePage.newPostText,
@@ -39,9 +39,13 @@ export let addPost = () => {
     rerenderEntireTree(state)
 }
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => { // Обновление значения инпута через стейт
     state.profilePage.newPostText = newText
     rerenderEntireTree(state)
+}
+
+export const subscribe  = (observer) => {
+    rerenderEntireTree = observer // Паттерн наблюдатель
 }
 
 export default state;
