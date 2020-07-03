@@ -30,22 +30,24 @@ let store = {
     getState() {
         return this._state
     },
-    addPost() { // Добавление постов в <My posts />
-        let newPost = {
-            id: 3,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-        };
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText) { // Обновление значения инпута через стейт
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
     subscribe(observer) {
         this._callSubscriber = observer // Паттерн наблюдатель
+    },
+
+    dispatch(action) { // action обьект у которого обезательно свойство type
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 3,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+            };
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        }
     },
 }
 
