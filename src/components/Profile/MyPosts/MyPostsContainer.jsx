@@ -4,13 +4,13 @@ import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 
 
-let StatToProps = (state) => {
+let mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText
     }
 }
-let DispatchToProps = (dispatch) => {
+let mapDispatchToProps = (dispatch) => {
     return {
         updateNewPostText: (text) => {
             let action = updateNewPostTextActionCreator(text);
@@ -22,6 +22,6 @@ let DispatchToProps = (dispatch) => {
     }
 }
 
-let MyPostsContainer = connect(StatToProps, DispatchToProps)(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer;
