@@ -38,7 +38,7 @@ const Users = (props) => {
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                     withCredentials: true,
                                     headers: {
-                                        "API-KEY": "463258d9-5ed4-4784-858e-ea28f4a1e763"
+                                        "API-KEY": "9f34aa68-9c0d-427e-9350-e0c01678f443"
                                     }
                                 })
                                     .then(response => {
@@ -51,7 +51,7 @@ const Users = (props) => {
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                     withCredentials: true,
                                     headers: {
-                                        "API-KEY": "463258d9-5ed4-4784-858e-ea28f4a1e763"
+                                        "API-KEY": "9f34aa68-9c0d-427e-9350-e0c01678f443"
                                     }
                                 })
                                     // в посте withCredentials передается не вторым а третьим параметром
