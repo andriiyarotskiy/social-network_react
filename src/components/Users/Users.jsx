@@ -4,6 +4,7 @@ import userPhoto from "../../assets/images/user.png"
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 import {toggleFollowingProgress} from "../../Redux/users-reducer";
+import {usersAPI} from "../../api/api";
 
 
 const Users = (props) => {
@@ -37,38 +38,12 @@ const Users = (props) => {
                             ? <button
                                 disabled={props.followingInProgress.some(id => id === u.id)}
                                 onClick={() => {
-                                    props.toggleFollowingProgress(true, u.id)
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "c221a774-09dc-4bbd-a2fb-6e9202854d46"
-                                        }
-                                    })
-                                        .then(response => {
-                                            if (response.data.resultCode === 0) {
-                                                props.unfollow(u.id)
-                                            }
-                                            props.toggleFollowingProgress(false, u.id)
-
-                                        });
+                                    props.unfollow(u.id)
                                 }}>Unfollow</button>
                             : <button
                                 disabled={props.followingInProgress.some(id => id === u.id)} // если хоть одна ИДшка равна u.id то тогда кнопка дизейблится
                                 onClick={() => {
-                                    props.toggleFollowingProgress(true, u.id)
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "c221a774-09dc-4bbd-a2fb-6e9202854d46"
-                                        }
-                                    })
-                                        // в посте withCredentials передается не вторым а третьим параметром
-                                        .then(response => {
-                                            if (response.data.resultCode === 0) {
-                                                props.follow(u.id)
-                                            }
-                                            props.toggleFollowingProgress(false, u.id)
-                                        });
+                                    props.follow(u.id)
                                 }}>Follow</button>}
                     </div>
                 </span>
